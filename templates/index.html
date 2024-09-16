@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunarLight Image Enhancer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Full-height background image */
+        .bg-image {
+            background-image: url('{{ url_for('static', filename='images/cb125a4e-9610-4acc-a679-ee32a085c171.jpeg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Overlay to darken background image */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Project name styling with gradient text outline */
+        .project-name {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+        }
+
+        .project-name .heading {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fff; /* White text */
+            text-shadow: 
+                -1px -1px 0 #e94560,  
+                1px -1px 0 #e94560,
+                -1px 1px 0 #e94560,
+                1px 1px 0 #e94560, 
+                0 0 5px rgba(0, 0, 0, 0.7); /* White outline effect with gradient shadow */
+            margin: 0;
+        }
+
+        .project-name .sub {
+            font-size: 1.5rem; /* Smaller font size for subheading */
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            opacity: 0.9; /* Slight transparency for a cool effect */
+            margin-top: 10px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #1a1a2e; /* Dark background color */
+            border-bottom: 2px solid #e94560; /* Adding a bottom border */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #45d9e9 !important; /* Highlight brand name */
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1.1rem;
+            margin-right: 15px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: #e94560 !important; /* Highlight on hover */
+        }
+
+        .navbar-toggler {
+            border-color: #e94560;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28233, 69, 96, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/ %3E%3C/svg%3E");
+        }
+
+        .nav-item.disabled .nav-link {
+            color: #6c757d !important;
+        }
+
+        /* What We Do Section */
+        .what-we-do {
+            background-color: #0d0d1a; /* Dark background color */
+            color: #fff; /* White text */
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .what-we-do .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .what-we-do .section-description {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.8; /* Slight transparency for a cool effect */
+        }
+
+        /* Image processing section styling */
+        .image-processing {
+            background-image: url('{{ url_for('static', filename='images/Big_Dipper.jpeg') }}');
+            background-color: #1a1a2e; /* Dark background color */
+            color: #fff; /* White text */
+            padding: 60px 0;
+        }
+
+        .image-processing h1 {
+            color: #e94560; /* Highlight color for title */
+            margin-bottom: 40px;
+        }
+
+        .image-processing .form-group label {
+            color: #fff; /* White label text */
+        }
+
+        .image-processing .btn-primary {
+            background-color: #e94560;
+            border-color: #e94560;
+        }
+
+        .image-processing .btn-primary:hover {
+            background-color: #d84a60;
+            border-color: #d84a60;
+        }
+
+        .image-processing img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #e94560; /* Border to match theme */
+            border-radius: 8px; /* Rounded corners for a modern look */
+        }
+
+        .image-processing .text-center {
+            color: #fff;
+        }
+
+        /* Footer Styling */
+        .footer {
+    background-color: #202069; /* Dark background color */
+}
+
+.footer p {
+    color: #f0f0f0; /* Light text color for readability */
+}
+
+.footer .text-danger {
+    color: #e94560; /* Highlight color for heart icon */
+}
+
+.footer .social-links a {
+    color: #f0f0f0; /* Light color for social icons */
+    transition: color 0.3s ease;
+}
+
+.footer .social-links a:hover {
+    color: #e94560; /* Highlight color on hover */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LUNA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Process</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background image section -->
+    <div class="bg-image">
+        <div class="overlay"></div>
+        <div class="project-name">
+            <div class="heading">LunarLIGHT</div>
+            <div class="sub">From Shadows to Sight, Exploring the Moon's Poles</div>
+        </div>
+    </div>
+
+    <!-- What We Do Section -->
+    <section class="what-we-do">
+        <div class="container">
+            <div class="section-title">What We Do</div>
+            <div class="section-description">
+                Our LunarLIGHT project is dedicated to enhancing the visibility and quality of images taken from low-light environments, such as the moon's poles. Using advanced image processing techniques and machine learning algorithms, we transform shadowed and low-contrast images into clear, detailed visuals, providing invaluable insights and data. From improving image clarity to enabling detailed analysis, our solution pushes the boundaries of space exploration imaging.
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Processing Section -->
+    <section class="image-processing">
+        <div class="container mt-5">
+            <h1 class="text-center">Image Processing App</h1>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-6">
+                    <!-- Image upload form -->
+                    <form action="{{ url_for('main.upload_image') }}" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image">Choose an image to upload</label>
+                            <input type="file" class="form-control-file" id="image" name="image" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Display results only if images are processed -->
+            {% if original_image_filename and enhanced_image_filename %}
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12">
+                    <h4 class="text-center">Processing Results:</h4>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5>Original Image:</h5>
+                            <img src="{{ url_for('static', filename='uploads/' + original_image_filename) }}" class="img-fluid">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Enhanced Image:</h5>
+                            <img src="{{ url_for('static', filename='processed/' + enhanced_image_filename) }}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p><strong>SNR Before Enhancement:</strong> {{ snr_before }}</p>
+                        <p><strong>SNR After Enhancement:</strong> {{ snr_after }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- Footer -->
+<footer class="footer bg-dark text-light py-4">
+    <div class="container text-center">
+        
+        <p class="mb-0">Built with <span class="text-danger">&hearts;</span> by team LUMINARY</p>
+        <div class="social-links mt-2">
+            <a href="#" class="text-light mx-2"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-light mx-2"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
